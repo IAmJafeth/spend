@@ -1,0 +1,7 @@
+[project]
+name = "spend"
+version = "0.1.0"
+description = "Expense Tracker practice project from @Roadmap.sh"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
