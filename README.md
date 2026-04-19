@@ -21,6 +21,7 @@ This project is focused on building a clean and practical CLI app to track perso
 - [ ] Update an expense
 - [ ] Delete an expense
 - [ ] View all expenses
+- [ ] Persist expenses data on disk
 - [ ] View a summary of all expenses
 - [ ] View a summary of expenses for a specific month (current year)
 
