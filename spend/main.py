@@ -14,7 +14,9 @@ def run(
     out = out or sys.stdout
     err = err or sys.stderr
 
-    parser: ArgumentParser = build_parser()
+    parser: ArgumentParser
+    subparsers: dict
+    parser, subparsers = build_parser()
     args = parser.parse_args(argv)
 
     expense_log = ExpenseLog()
@@ -29,10 +31,20 @@ def run(
         case "update":
             try:
                 expense = expense_log.udpate_expense(args.id, args.description, args.amount, args.date)
-                print(f"Expense updated: {expense}")
+                print(f"Expense updated: {expense}", file=out)
                 return 0
             except ValueError as e:
-                parser.error(str(e))
+                subparsers[args.command].error(str(e))
+            except IndexError as e:
+                print("error: ", e, file=out)
+        
+        case "delete":
+            try:
+                expense = expense_log.delete_expense(args.id)
+                print(f"Expense deleted: {expense}")
+                return 0
+            except IndexError as e:
+                print("error: ", e, file=out)
     
     return 0
 

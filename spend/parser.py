@@ -2,7 +2,7 @@ import argparse
 from datetime import date
 
 
-def build_parser() -> argparse.ArgumentParser:
+def build_parser() -> tuple[argparse.ArgumentParser, dict]:
 
     # Main Parser
     parser = argparse.ArgumentParser(
@@ -60,5 +60,11 @@ def build_parser() -> argparse.ArgumentParser:
     # Command Subparser - Delete
     delete_subparser = subparser.add_parser("delete", help="Delete an Expense")
     delete_subparser.add_argument("-i", "--id", help="ID of the Expense to delete", type=int, required=True)
-
-    return parser
+    
+    subparsers = {
+        "add": add_subparser,
+        "update": update_subparser,
+        "delete": delete_subparser
+    }
+    
+    return parser, subparsers

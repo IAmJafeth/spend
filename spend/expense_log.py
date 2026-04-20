@@ -32,9 +32,9 @@ class ExpenseLog:
             raise ValueError("Required input data to modify Expense")
 
         expense = self.expenses.get(id)
-
+        
         if not expense:
-            raise ValueError(f"Expense ({id}) not found")
+            raise IndexError(f"Expense ({id}) not found")
 
         if description:
             expense.description = description
@@ -49,6 +49,6 @@ class ExpenseLog:
         expense = self.expenses.pop(id, None)
 
         if not expense:
-            raise ValueError(f"Expense ({id}) not found")
+            raise IndexError(f"Expense ({id}) not found")
 
         return expense
