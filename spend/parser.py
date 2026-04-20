@@ -44,16 +44,16 @@ def build_parser() -> argparse.ArgumentParser:
 
     # Command Subparser - Update - Expense Data Argument Group
     expense_data_ag = update_subparser.add_argument_group(
-        title="Expense data", description="Information to update on the expense"
+        title="Expense Update Data", description="Information to update on the expense | AT LEAST ONE ARGUMENT IS REQUIRED"
     )
     expense_data_ag.add_argument(
-        "-d", "--description", help="New Expense description", type=str
+        "-d", "--description", help="New Expense description", type=str, default=None
     )
     expense_data_ag.add_argument(
-        "-a", "--amount", help="New Expense amount", type=float
+        "-a", "--amount", help="New Expense amount", type=float, default=None
     )
     expense_data_ag.add_argument(
-        "-t", "--date", help="New Date amount", type=date.fromisoformat
+        "-t", "--date", help="New Date amount", type=date.fromisoformat, default=None
     )
 
     return parser
