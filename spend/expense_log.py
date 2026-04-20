@@ -20,3 +20,27 @@ class ExpenseLog:
         self.expenses[expense.id] = expense
         self.id_counter += 1
         return expense
+        
+    def udpate_expense(
+        self,
+        id: int,
+        description: str|None = None,
+        amount: float|None = None,
+        date: d | None = None
+    ) -> Expense:
+        if not any((description, amount, date)):
+            raise ValueError("Required input data to modify Expense")
+        
+        expense = self.expenses.get(id)
+        
+        if not expense:
+            raise ValueError(f"Expense ({id}) not found")
+            
+        if description:
+            expense.description = description
+        if amount:
+            expense.amount = amount
+        if date:
+            expense.date = date
+        
+        return expense
