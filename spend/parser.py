@@ -37,14 +37,15 @@ def build_parser() -> argparse.ArgumentParser:
     update_subparser.add_argument(
         "-i",
         "--id",
-        help="ID of the expense to udpate *REQUIRED",
+        help="ID of the Expense to update *REQUIRED",
         type=int,
         required=True,
     )
 
     # Command Subparser - Update - Expense Data Argument Group
     expense_data_ag = update_subparser.add_argument_group(
-        title="Expense Update Data", description="Information to update on the expense | AT LEAST ONE ARGUMENT IS REQUIRED"
+        title="Expense Update Data",
+        description="Information to update on the expense | AT LEAST ONE ARGUMENT IS REQUIRED",
     )
     expense_data_ag.add_argument(
         "-d", "--description", help="New Expense description", type=str, default=None
@@ -55,5 +56,9 @@ def build_parser() -> argparse.ArgumentParser:
     expense_data_ag.add_argument(
         "-t", "--date", help="New Date amount", type=date.fromisoformat, default=None
     )
+
+    # Command Subparser - Delete
+    delete_subparser = subparser.add_parser("delete", help="Delete an Expense")
+    delete_subparser.add_argument("-i", "--id", help="ID of the Expense to delete", type=int, required=True)
 
     return parser
