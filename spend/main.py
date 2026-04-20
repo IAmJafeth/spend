@@ -33,6 +33,8 @@ def run(
                 return 0
             except ValueError as e:
                 parser.error(str(e))
+    
+    return 0
 
 
 
@@ -41,4 +43,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    SystemExit(main())
