@@ -19,7 +19,7 @@ This project is focused on building a clean and practical CLI app to track perso
 - [X] Application runs from the command line
 - [X] Add an expense with a description and amount
 - [X] Update an expense
-- [ ] Delete an expense
+- [X] Delete an expense
 - [ ] View all expenses
 - [ ] Persist expenses data on disk
 - [ ] View a summary of all expenses
