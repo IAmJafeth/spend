@@ -2,7 +2,7 @@ import argparse
 from datetime import date
 
 
-def build_parser() -> tuple[argparse.ArgumentParser, dict]:
+def build_parser() -> tuple[argparse.ArgumentParser, dict[str: argparse.ArgumentParser]]:
 
     # Main Parser
     parser = argparse.ArgumentParser(
