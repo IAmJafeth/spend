@@ -2,6 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 
 from expense import Expense
+from exceptions import ExpenseDataInvalid, ExpenseNotFound
 
 
 @dataclass
@@ -11,14 +12,19 @@ class ExpenseLog:
 
     def add_expense(
         self,
-        description: str = "Not specified",
-        amount: float = 0.0,
+        description: str | None = None,
+        amount: float | None = None,
         date: datetime.date | None = None,
     ) -> Expense:
+        if description is None or amount is None:
+            raise ExpenseDataInvalid("A description and amount is required to create an Expense")
+        
         date = date or datetime.date.today()
         expense = Expense(self.id_counter, description, amount, date)
+        
         self.expenses[expense.id] = expense
         self.id_counter += 1
+        
         return expense
 
     def udpate_expense(
@@ -29,12 +35,12 @@ class ExpenseLog:
         date: datetime.date | None = None,
     ) -> Expense:
         if description is None and amount is None and date is None:
-            raise ValueError("Required input data to modify Expense")
+            raise ExpenseDataInvalid("Required input data to modify Expense")
 
         expense = self.expenses.get(id)
 
         if not expense:
-            raise IndexError(f"Expense ({id}) not found")
+            raise ExpenseNotFound(f"Expense ({id}) not found")
 
         if description:
             expense.description = description
