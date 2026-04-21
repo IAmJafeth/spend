@@ -37,6 +37,7 @@ def run(
                 subparsers[args.command].error(str(e))
             except IndexError as e:
                 print("error: ", e, file=out)
+                return 2
         
         case "delete":
             try:
@@ -45,6 +46,7 @@ def run(
                 return 0
             except IndexError as e:
                 print("error: ", e, file=out)
+                return 2 
     
     return 0
 
