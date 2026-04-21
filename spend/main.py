@@ -38,10 +38,10 @@ def run(
                 return 0
             except ExpenseDataInvalid as e:
                 subparsers[args.command].print_usage(file=out)
-                print("error:",e,file=out)
+                print("error:",e,file=err)
                 return 2
             except ExpenseNotFound as e:
-                print("error:", e, file=out)
+                print("error:", e, file=err)
                 return 2
 
         case "delete":
@@ -50,7 +50,7 @@ def run(
                 print(f"Expense deleted: {expense}")
                 return 0
             except ExpenseNotFound as e:
-                print("error: ", e, file=out)
+                print("error: ", e, file=err)
                 return 2
 
     return 0
