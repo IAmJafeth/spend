@@ -30,7 +30,7 @@ def run(
 
         case "update":
             try:
-                expense = expense_log.udpate_expense(args.id, args.description, args.amount, args.date)
+                expense = expense_log.update_expense(args.id, args.description, args.amount, args.date)
                 print(f"Expense updated: {expense}", file=out)
                 return 0
             except ValueError as e:

@@ -27,7 +27,7 @@ class ExpenseLog:
         
         return expense
 
-    def udpate_expense(
+    def update_expense(
         self,
         id: int,
         description: str | None = None,
@@ -42,11 +42,11 @@ class ExpenseLog:
         if not expense:
             raise ExpenseNotFound(f"Expense ({id}) not found")
 
-        if description:
+        if description is not None:
             expense.description = description
-        if amount:
+        if amount is not None:
             expense.amount = amount
-        if date:
+        if date is not None:
             expense.date = date
 
         return expense
