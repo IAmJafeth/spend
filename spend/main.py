@@ -4,6 +4,7 @@ from typing import Sequence, TextIO
 
 from expense_log import ExpenseLog
 from parser import build_parser
+from exceptions import ExpenseDataInvalid, ExpenseNotFound
 
 
 def run(
@@ -35,20 +36,20 @@ def run(
                 )
                 print(f"Expense updated: {expense}", file=out)
                 return 0
-            except ValueError as e:
+            except ExpenseDataInvalid as e:
                 subparsers[args.command].print_usage(file=out)
                 print("error:",e,file=out)
                 return 2
-            except IndexError as e:
+            except ExpenseNotFound as e:
                 print("error:", e, file=out)
-                return 2˝˝
+                return 2
 
         case "delete":
             try:
                 expense = expense_log.delete_expense(args.id)
                 print(f"Expense deleted: {expense}")
                 return 0
-            except IndexError as e:
+            except ExpenseNotFound as e:
                 print("error: ", e, file=out)
                 return 2
 
