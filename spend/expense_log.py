@@ -1,5 +1,5 @@
+import datetime
 from dataclasses import dataclass, field
-from datetime import date as d
 
 from expense import Expense
 
@@ -13,9 +13,9 @@ class ExpenseLog:
         self,
         description: str = "Not specified",
         amount: float = 0.0,
-        date: d | None = None,
+        date: datetime.date | None = None,
     ) -> Expense:
-        date = date or d.today()
+        date = date or datetime.date.today()
         expense = Expense(self.id_counter, description, amount, date)
         self.expenses[expense.id] = expense
         self.id_counter += 1
@@ -26,13 +26,13 @@ class ExpenseLog:
         id: int,
         description: str | None = None,
         amount: float | None = None,
-        date: d | None = None,
+        date: datetime.date | None = None,
     ) -> Expense:
-        if not any((description, amount, date)):
+        if description is None and amount is None and date is None:
             raise ValueError("Required input data to modify Expense")
 
         expense = self.expenses.get(id)
-        
+
         if not expense:
             raise IndexError(f"Expense ({id}) not found")
 
