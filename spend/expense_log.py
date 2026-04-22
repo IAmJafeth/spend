@@ -18,6 +18,8 @@ class ExpenseLog:
     ) -> Expense:
         if description is None or amount is None:
             raise ExpenseDataInvalid("A description and amount is required to create an Expense")
+        if amount < 0:
+            raise ExpenseDataInvalid("Expense amount can not be lower than 0")
         
         date = date or datetime.date.today()
         expense = Expense(self.id_counter, description, amount, date)
@@ -36,16 +38,18 @@ class ExpenseLog:
     ) -> Expense:
         if description is None and amount is None and date is None:
             raise ExpenseDataInvalid("Required input data to modify Expense")
-
+            
         expense = self.expenses.get(id)
 
         if not expense:
             raise ExpenseNotFound(f"Expense ({id}) not found")
-
+        
+        if amount is not None:
+            if amount < 0: 
+                raise ExpenseDataInvalid("Expense amount can not be lower than 0")
+            expense.amount = amount
         if description is not None:
             expense.description = description
-        if amount is not None:
-            expense.amount = amount
         if date is not None:
             expense.date = date
 

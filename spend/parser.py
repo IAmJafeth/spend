@@ -1,6 +1,18 @@
 import argparse
 from datetime import date
 
+def positive_float(value: str) -> float:
+    try: 
+        amount = float(value)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"'{value}' is not a valid amount")
+    
+    if amount < 0: 
+        raise argparse.ArgumentTypeError("Expense amount can not be negative")
+    
+    return amount
+    
+
 
 def build_parser() -> tuple[argparse.ArgumentParser, dict[str, argparse.ArgumentParser]]:
 
@@ -26,7 +38,7 @@ def build_parser() -> tuple[argparse.ArgumentParser, dict[str, argparse.Argument
         required=True,
     )
     add_subparser.add_argument(
-        "-a", "--amount", help="Expense amount *REQUIRED", type=float, required=True
+        "-a", "--amount", help="Expense amount *REQUIRED", type=positive_float, required=True
     )
     add_subparser.add_argument(
         "-t", "--date", help="Date of the expense YYYY-mm-dd", type=date.fromisoformat
@@ -51,7 +63,7 @@ def build_parser() -> tuple[argparse.ArgumentParser, dict[str, argparse.Argument
         "-d", "--description", help="New Expense description", type=str, default=None
     )
     expense_data_ag.add_argument(
-        "-a", "--amount", help="New Expense amount", type=float, default=None
+        "-a", "--amount", help="New Expense amount", type=positive_float, default=None
     )
     expense_data_ag.add_argument(
         "-t", "--date", help="New Date amount", type=date.fromisoformat, default=None
